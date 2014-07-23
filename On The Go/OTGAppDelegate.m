@@ -7,6 +7,9 @@
 //
 
 #import "OTGAppDelegate.h"
+#import "OTGMapViewViewController.h"
+#import "OTGNetworkConstants.h"
+#import <GoogleMaps/GoogleMaps.h>
 
 @implementation OTGAppDelegate
 
@@ -18,7 +21,11 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    OTGMapViewViewController *mapViewController = [[OTGMapViewViewController alloc] init];
+    [GMSServices provideAPIKey:IOS_API_KEY];
     self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = mapViewController;
     [self.window makeKeyAndVisible];
     return YES;
 }
