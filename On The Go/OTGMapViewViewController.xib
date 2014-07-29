@@ -10,6 +10,7 @@
                 <outlet property="endSearchBar" destination="80f-51-Aoz" id="sQU-jH-2ey"/>
                 <outlet property="mainAddress" destination="mhr-GG-n99" id="tYe-Or-j5L"/>
                 <outlet property="mapView" destination="hlR-aQ-ypu" id="NRB-OD-FvN"/>
+                <outlet property="showRouteButton" destination="EiM-9y-8LT" id="sdl-S8-tFT"/>
                 <outlet property="startSearchBar" destination="enf-z5-E1X" id="ASj-WQ-A8V"/>
                 <outlet property="subAddress" destination="HwQ-zr-ayP" id="XfG-2w-0pf"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Q0f-c7-Yvb"/>
@@ -40,6 +41,13 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="EiM-9y-8LT">
+                                    <rect key="frame" x="213" y="13" width="87" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Show Route">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="0.33000000000000002" colorSpace="calibratedWhite"/>
                             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>

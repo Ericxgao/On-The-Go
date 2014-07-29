@@ -20,6 +20,7 @@
 @property (nonatomic, strong) IBOutlet UIView *detailView;
 @property (nonatomic, strong) IBOutlet UILabel *mainAddress;
 @property (nonatomic, strong) IBOutlet UILabel *subAddress;
+@property (nonatomic, strong) IBOutlet UIButton *showRouteButton;
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) CLLocation *currentLocation;
 @property (nonatomic, strong) UISearchDisplayController *startSearchController;
@@ -31,6 +32,8 @@
 @property (nonatomic, strong) NSString *endAddress;
 @property (nonatomic, strong) GMSMarker *startMarker;
 @property (nonatomic, strong) GMSMarker *endMarker;
+@property (nonatomic, strong) NSMutableArray *routes;
+@property (nonatomic, strong) GMSPolyline *routeLine;
 
 @end
 
@@ -86,6 +89,9 @@
     // Set up search bar table views
     [self.startSearchController.searchResultsTableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
     [self.endSearchController.searchResultsTableView setTableFooterView:[[UIView alloc] initWithFrame:CGRectZero]];
+    
+    // Attach actions to showRoute Button
+    [self.showRouteButton addTarget:self action:@selector(showRoute) forControlEvents:UIControlEventTouchUpInside];
 }
 
 // Searches for suggested places when user inputs an address
@@ -114,6 +120,9 @@
         CLLocationDegrees latitude = [result[@"geometry"][@"location"][@"lat"] doubleValue];
         CLLocationDegrees longitude = [result[@"geometry"][@"location"][@"lng"] doubleValue];
         
+        // Remove a path if one exists
+        self.routeLine.map = nil;
+        
         if (tableView == self.startSearchController.searchResultsTableView) {
             [self.startSearchController setActive:NO animated:YES];
             self.endSearchBar.hidden = NO;
@@ -130,6 +139,7 @@
             self.startMarker.title = @"Start Location";
             self.startMarker.map = self.mapView;
             [self showDetailViewForMarker:self.startMarker];
+        
         } else if (tableView == self.endSearchController.searchResultsTableView) {
             [self.endSearchController setActive:NO animated:YES];
             
@@ -145,12 +155,6 @@
             self.endMarker.title = @"End Location";
             self.endMarker.map = self.mapView;
             [self showDetailViewForMarker:self.endMarker];
-            
-            [OTGNetworkRequest fetchRouteWithStart:self.startLocation withEnd:self.endLocation success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSDictionary *json = responseObject;
-                NSArray *routes = json[@"routes"];
-                
-            }];
         }
     }];
 }
@@ -210,6 +214,29 @@
     
     [UIView animateWithDuration:0.2 animations:^{
         self.detailView.frame = CGRectMake(0, 513, 320, 55);
+    }];
+}
+
+- (IBAction)showRoute {
+    [OTGNetworkRequest fetchRouteWithStart:self.startLocation withEnd:self.endLocation success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *json = responseObject;
+        NSArray *routes = json[@"routes"];
+        NSString *encodedOverviewPath = @"";
+        
+        [self.routes removeAllObjects];
+        self.routes = [[NSMutableArray alloc] init];
+        
+        for (int i = 0; i < routes.count; i++) {
+            encodedOverviewPath = routes[i][@"overview_polyline"][@"points"];
+            [self.routes addObject:[GMSPath pathFromEncodedPath:encodedOverviewPath]];
+        }
+        
+        // For now, just take the first route in the list
+        self.routeLine.map = nil;
+        self.routeLine = [GMSPolyline polylineWithPath:self.routes[0]];
+        self.routeLine.strokeColor = [UIColor blueColor];
+        self.routeLine.strokeWidth = 3;
+        self.routeLine.map = self.mapView;
     }];
 }
 
