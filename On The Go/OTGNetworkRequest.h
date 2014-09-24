@@ -18,4 +18,8 @@
 + (void)fetchPlaceDetailsWithDescription:(NSString *) description withLocation:(CLLocation *)currentLocation success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success;
 
 + (void)fetchRouteWithStart:(CLLocation *)startLocation withEnd:(CLLocation *)endLocation success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success;
+
++ (void)fetchDistanceBetweenStart:(CLLocation *)startLocation andEnd:(CLLocation *)endLocation success: (void (^)(AFHTTPRequestOperation *operation, id responseObject))success;
+
+
 @end

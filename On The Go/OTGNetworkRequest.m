@@ -16,51 +16,35 @@
 + (void)fetchPotentialPlacesWithString:(NSString *) searchString withLocation:(CLLocation *)currentLocation success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success {
     searchString = [searchString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *requestURLString = [NSString stringWithFormat:@"%@input=%@&radius=5000&location=%f,%f&key=%@", BASE_AUTOCOMPLETE_URL, searchString, currentLocation.coordinate.latitude, currentLocation.coordinate.longitude, SERVER_API_KEY];
-    NSURL *requestURL = [NSURL URLWithString:requestURLString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:requestURL];
     
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFJSONResponseSerializer serializer];
-    
-    [operation setCompletionBlockWithSuccess:success failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@", error);
-    }];
-    
-    [operation start];
+    [OTGNetworkRequest setUpRequestOperationWithRequestURLString:requestURLString success:success];
 }
 
 + (void)fetchPlaceDetailsWithReference:(NSString *) reference success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success {
     NSString *requestURLString = [NSString stringWithFormat:@"%@reference=%@&key=%@", BASE_PLACE_DETAIL_URL, reference, SERVER_API_KEY];
-    NSURL *requestURL = [NSURL URLWithString:requestURLString];
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:requestURL];
     
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFJSONResponseSerializer serializer];
-    
-    [operation setCompletionBlockWithSuccess:success failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@", error);
-    }];
-    
-    [operation start];
+    [OTGNetworkRequest setUpRequestOperationWithRequestURLString:requestURLString success:success];
 }
 
 + (void)fetchPlaceDetailsWithDescription:(NSString *) description withLocation:(CLLocation *)currentLocation success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success {
     NSString *requestURLString = [NSString stringWithFormat:@"%@location=%f,%f&rankby=distance&name=%@&key=%@", BASE_PLACE_SEARCH_URL, currentLocation.coordinate.latitude, currentLocation.coordinate.longitude, description, SERVER_API_KEY];
-    NSURL *requestURL = [NSURL URLWithString:requestURLString];
-    NSURLRequest *request = [[NSURLRequest alloc] initWithURL:requestURL];
     
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFJSONResponseSerializer serializer];
-    
-    [operation setCompletionBlockWithSuccess:success failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@", error);
-    }];
-    
-    [operation start];
+    [OTGNetworkRequest setUpRequestOperationWithRequestURLString:requestURLString success:success];
 }
 
 + (void)fetchRouteWithStart:(CLLocation *)startLocation withEnd:(CLLocation *)endLocation success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success {
     NSString *requestURLString = [NSString stringWithFormat:@"%@origin=%f,%f&destination=%f,%f&key=%@", BASE_ROUTE_URL, startLocation.coordinate.latitude, startLocation.coordinate.longitude, endLocation.coordinate.latitude, endLocation.coordinate.longitude, SERVER_API_KEY];
+    
+    [OTGNetworkRequest setUpRequestOperationWithRequestURLString:requestURLString success:success];
+}
+
++ (void)fetchDistanceBetweenStart:(CLLocation *)startLocation andEnd:(CLLocation *)endLocation success: (void (^)(AFHTTPRequestOperation *operation, id responseObject))success {
+    NSString *requestURLString = [NSString stringWithFormat:@"%@origins=%f,%f&destinations=%f,%f&key=%@", BASE_DISTANCE_MATRIX_URL, startLocation.coordinate.latitude, startLocation.coordinate.longitude, endLocation.coordinate.latitude, endLocation.coordinate.longitude, SERVER_API_KEY];
+    
+    [OTGNetworkRequest setUpRequestOperationWithRequestURLString:requestURLString success:success];
+}
+
++ (void)setUpRequestOperationWithRequestURLString:(NSString *)requestURLString success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success {
     NSURL *requestURL = [NSURL URLWithString:requestURLString];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:requestURL];
     

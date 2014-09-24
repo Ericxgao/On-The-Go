@@ -49,6 +49,7 @@
 		0D7E6BAC196DD6F2007E7A5C /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7E6BA1196DD6F2007E7A5C /* AFURLRequestSerialization.m */; };
 		0D7E6BAD196DD6F2007E7A5C /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7E6BA3196DD6F2007E7A5C /* AFURLResponseSerialization.m */; };
 		0D7E6BAE196DD6F2007E7A5C /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D7E6BA5196DD6F2007E7A5C /* AFURLSessionManager.m */; };
+		0DCEF44719B3EDE4004BE8BB /* AFOAuth2Client.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DCEF44619B3EDE4004BE8BB /* AFOAuth2Client.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +122,8 @@
 		0D7E6BA3196DD6F2007E7A5C /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		0D7E6BA4196DD6F2007E7A5C /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		0D7E6BA5196DD6F2007E7A5C /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		0DCEF44519B3EDE4004BE8BB /* AFOAuth2Client.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFOAuth2Client.h; sourceTree = "<group>"; };
+		0DCEF44619B3EDE4004BE8BB /* AFOAuth2Client.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFOAuth2Client.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,6 +279,7 @@
 		0D7E6B92196DD6F2007E7A5C /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
+				0DCEF44419B3EDE4004BE8BB /* AFOAuth2Client */,
 				0D7E6B93196DD6F2007E7A5C /* AFHTTPRequestOperation.h */,
 				0D7E6B94196DD6F2007E7A5C /* AFHTTPRequestOperation.m */,
 				0D7E6B95196DD6F2007E7A5C /* AFHTTPRequestOperationManager.h */,
@@ -297,6 +301,15 @@
 				0D7E6BA5196DD6F2007E7A5C /* AFURLSessionManager.m */,
 			);
 			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		0DCEF44419B3EDE4004BE8BB /* AFOAuth2Client */ = {
+			isa = PBXGroup;
+			children = (
+				0DCEF44519B3EDE4004BE8BB /* AFOAuth2Client.h */,
+				0DCEF44619B3EDE4004BE8BB /* AFOAuth2Client.m */,
+			);
+			path = AFOAuth2Client;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -438,6 +451,7 @@
 				0D7E6B6B196A9030007E7A5C /* OTGSearchBarCell.m in Sources */,
 				0D7E6BA9196DD6F2007E7A5C /* AFNetworkReachabilityManager.m in Sources */,
 				0D51CA3B1963A5320024B3BD /* main.m in Sources */,
+				0DCEF44719B3EDE4004BE8BB /* AFOAuth2Client.m in Sources */,
 				0D7E6BAB196DD6F2007E7A5C /* AFURLConnectionOperation.m in Sources */,
 				0D7E6BA6196DD6F2007E7A5C /* AFHTTPRequestOperation.m in Sources */,
 				0D7E6BA8196DD6F2007E7A5C /* AFHTTPSessionManager.m in Sources */,

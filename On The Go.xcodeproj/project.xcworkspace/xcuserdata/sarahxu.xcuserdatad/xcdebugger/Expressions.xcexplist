@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[OTGMapViewViewController viewDidLoad]:OTGMapViewViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[OTGMapViewViewController textField:shouldChangeCharactersInRange:replacementString:]:OTGMapViewViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "-[OTGMapViewViewController keyboardWillShow:]:OTGMapViewViewController.m">
+      </ContextState>
+      <ContextState
+         contextName = "__62-[OTGMapViewViewController tableView:didSelectRowAtIndexPath:]_block_invoke:OTGMapViewViewController.m">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
