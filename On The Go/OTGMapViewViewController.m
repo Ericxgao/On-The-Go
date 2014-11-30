@@ -197,6 +197,7 @@
             [self showDetailViewForMarker:self.endMarker];
             
             self.showRouteButton.hidden = NO;
+            self.showYelpSearchViewButton.hidden = NO;
         }
     }];
 }
@@ -256,7 +257,7 @@
     if (textField == self.timeTextField) {
         if ([string isEqualToString:@""]) {
             if (fullInput.length <= 1) {
-                self.timeLabelWidthConstraint.constant = 44;
+                self.timeLabelWidthConstraint.constant = 19;
                 return YES;
             }
             CGSize stringSize = [[fullInput substringToIndex:fullInput.length - 1] sizeWithAttributes:@{NSFontAttributeName: [UIFont systemFontOfSize:14]}];
@@ -378,6 +379,7 @@
 
 - (IBAction)showRoute {
     [OTGNetworkRequest fetchRouteWithStart:self.startLocation withEnd:self.endLocation success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    
         NSDictionary *json = responseObject;
         NSArray *routes = json[@"routes"];
         GMSMutablePath *path = [[GMSMutablePath alloc] init];
@@ -418,26 +420,28 @@
             
             [self.routes addObject:route];
         }
-            // For now, just take the first route in the list
-            NSInteger routeIndex = 0;
-            self.routeLine.map = nil;
-            self.routeLine = [GMSPolyline polylineWithPath:self.routes[routeIndex][@"path"]];
-            self.routeLine.strokeColor = [UIColor blueColor];
-            self.routeLine.strokeWidth = 3;
-            self.routeLine.map = self.mapView;
+            if (self.routes.count  > 0) {
+                // For now, just take the first route in the list
+                NSInteger routeIndex = 0;
+                self.routeLine.map = nil;
+                self.routeLine = [GMSPolyline polylineWithPath:self.routes[routeIndex][@"path"]];
+                self.routeLine.strokeColor = [UIColor blueColor];
+                self.routeLine.strokeWidth = 3;
+                self.routeLine.map = self.mapView;
+                
+                // Converting distance and time to readable values
+                NSInteger distance = [self.routes[routeIndex][@"distance"] intValue];
+                NSInteger travelTime = [self.routes[routeIndex][@"travelTime"] intValue];
+                
+                self.distance = [self convertMetersToMiles:distance];
+                self.travelTime = [self convertSecondsToHoursMinutes:travelTime];
             
-            // Converting distance and time to readable values
-            NSInteger distance = [self.routes[routeIndex][@"distance"] intValue];
-            NSInteger travelTime = [self.routes[routeIndex][@"travelTime"] intValue];
-            
-            self.distance = [self convertMetersToMiles:distance];
-            self.travelTime = [self convertSecondsToHoursMinutes:travelTime];
-        
-            // Update yelp Search View with new distance and time
-            self.estimatedDistanceAndTimeLabel.text = [NSString stringWithFormat:@"Distance: %@, Travel Time: %@", self.distance, self.travelTime];
-            
-            GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithPath:self.routes[routeIndex][@"path"]];
-            [self.mapView animateWithCameraUpdate:[GMSCameraUpdate fitBounds:bounds withPadding:50]];
+                // Update yelp Search View with new distance and time
+                self.estimatedDistanceAndTimeLabel.text = [NSString stringWithFormat:@"Distance: %@, Travel Time: %@", self.distance, self.travelTime];
+                
+                GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithPath:self.routes[routeIndex][@"path"]];
+                [self.mapView animateWithCameraUpdate:[GMSCameraUpdate fitBounds:bounds withPadding:50]];
+            }
         }];
     }
 

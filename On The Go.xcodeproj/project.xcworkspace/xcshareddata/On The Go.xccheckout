@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>44B36CD5-67C4-4E7A-9EB0-C98D017520CE</string>
+	<key>IDESourceControlProjectName</key>
+	<string>On The Go</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>57A88FCE23F163F314AA19CF46713FCA7EDE0AAD</key>
+		<string>https://github.com/Ericxgao/On-The-Go.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>On The Go.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>57A88FCE23F163F314AA19CF46713FCA7EDE0AAD</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/Ericxgao/On-The-Go.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>57A88FCE23F163F314AA19CF46713FCA7EDE0AAD</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>57A88FCE23F163F314AA19CF46713FCA7EDE0AAD</string>
+			<key>IDESourceControlWCCName</key>
+			<string>On%20The%20Go</string>
+		</dict>
+	</array>
+</dict>
+</plist>
